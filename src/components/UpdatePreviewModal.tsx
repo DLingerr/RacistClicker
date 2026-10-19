@@ -7,7 +7,7 @@ import ChangelogContent from "./ChangelogContent";
 import "./UpdatePreviewModal.css";
 
 const GITHUB_RELEASES_URL =
-  "https://github.com/Blur009/Blur-AutoClicker/releases/latest";
+  "https://github.com/DLingerr/RacistClicker/releases/latest";
 
 interface Props {
   open: boolean;

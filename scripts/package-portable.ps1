@@ -89,7 +89,7 @@ Portable data
 
 Updates
   This build does not auto-update. When a new release is announced, download
-  the newest portable zip from https://github.com/Blur009/Blur-AutoClicker/releases
+  the newest portable zip from https://github.com/DLingerr/RacistClicker/releases
   and replace the files (your Data folder is kept).
 "@ | Set-Content -Path (Join-Path $stageDir 'README.txt')
 

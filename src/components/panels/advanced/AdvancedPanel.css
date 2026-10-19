@@ -1,0 +1,356 @@
+.adv-seg-btn-dynamic {
+  flex: 1;
+  height: calc(var(--adv-control-height) - 2px);
+  font-family: "RobotoFlex", sans-serif;
+  font-size: 1rem;
+  font-weight: var(--font-weight-md);
+  line-height: 1.125rem;
+  padding: 0.25rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.adv-seg-btn:hover,
+.adv-seg-btn-dynamic:hover {
+  color: var(--text-muted);
+}
+
+.adv-seg-btn.active,
+.adv-seg-btn-dynamic.active {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+.adv-seg-btn:focus,
+.adv-seg-btn:focus-visible,
+.adv-seg-btn-dynamic:focus,
+.adv-seg-btn-dynamic:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.adv-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.adv-col > .adv-sectioncontainer:last-child {
+  margin-bottom: 0;
+}
+
+.adv-basic-card {
+  flex: none;
+}
+
+.adv-limits-card {
+  flex: none;
+}
+
+.adv-cadence-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.adv-cadence-header {
+  justify-content: space-between;
+}
+
+.adv-cadence-main-row {
+  min-width: 0;
+  justify-content: flex-start;
+}
+
+.adv-cadence-value {
+  min-width: 0;
+}
+
+.adv-cadence-value .adv-value-outline {
+  width: 100%;
+  margin-left: 0;
+}
+
+.adv-cadence-value .adv-value-outline--duration {
+  justify-content: flex-start;
+  background: var(--bg-elevated);
+}
+
+.adv-cadence-mode-toggle {
+  align-self: stretch;
+  margin-left: auto;
+  background: var(--bg-elevated);
+}
+
+.adv-cadence-mode-toggle .adv-seg-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.75rem;
+  height: auto;
+  min-height: calc(var(--adv-control-height) - 2px);
+  padding-inline: 0.875rem;
+}
+
+.adv-conversion-display {
+  font-family: "RobotoFlex", sans-serif;
+  font-size: 0.6875rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.adv-cadence-duration-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.adv-desc {
+  font-family: "RobotoFlex", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-li);
+  color: var(--text-dim);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.adv-target-row {
+  min-width: 0;
+}
+
+.adv-target-controls {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.adv-label {
+  font-family: "RobotoFlex", sans-serif;
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-hv);
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.adv-textbox {
+  display: flex;
+  align-items: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  min-height: var(--adv-control-height);
+  padding: 0;
+  min-width: 5rem;
+  transition: border-color 0.15s ease;
+}
+
+.adv-textbox:hover {
+  border-color: var(--accent-ring);
+}
+
+.adv-textbox-text {
+  font-family: "RobotoFlex", sans-serif;
+  font-size: 1rem;
+  line-height: 1.125rem;
+  padding: 0 0.625rem;
+  line-height: calc(var(--adv-control-height) - 2px);
+  font-weight: var(--font-weight-md);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.adv-input-type-group {
+  flex: 0 0 auto;
+}
+
+.adv-target-mouse-buttons {
+  flex: 0 0 auto;
+}
+
+.adv-key-case-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.875rem;
+  align-self: stretch;
+  border: none;
+  border-left: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-dim);
+  font-family: "RobotoFlex", sans-serif;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.adv-key-case-toggle--upper {
+  font-size: 1.125rem;
+}
+
+.adv-key-case-toggle--lower {
+  font-size: 1.125rem;
+}
+
+.adv-key-case-arrow--lower {
+  display: inline-block;
+  transform: rotate(180deg);
+}
+
+.adv-key-case-toggle:hover:not(:disabled) {
+  background: var(--bg-input);
+  color: var(--text-primary);
+}
+
+.adv-key-case-toggle:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.adv-minmax {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+  flex-wrap: wrap;
+}
+
+.adv-pick-btn {
+  font-family: "RobotoFlex", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-hv);
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+  width: 100%;
+}
+
+.adv-pick-btn:hover {
+  border-color: var(--text-dim);
+  color: var(--text-primary);
+}
+
+.adv-pick-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.adv-value-outline {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: stretch;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  min-height: var(--adv-control-height);
+  transition: border-color 0.2s ease;
+  overflow: hidden;
+}
+
+.adv-value-outline:hover {
+  border-color: var(--accent-ring);
+}
+
+.adv-value-outline > .adv-foc > .adv-seg-group {
+  background: transparent;
+  border-color: transparent;
+}
+
+/*
+  Value Outline item states
+  .adv-foc = focused (interactive element, distinct bg)
+  .adv-unf = unfocused (label/passthrough, transparent bg)
+*/
+.adv-foc {
+  min-height: calc(var(--adv-control-height) - 2px);
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  flex-shrink: 0;
+}
+
+.adv-foc-grow {
+  flex: 1;
+}
+
+.adv-unf {
+  min-height: calc(var(--adv-control-height) - 2px);
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  flex-shrink: 0;
+  color: var(--text-dim);
+  font-family: "RobotoFlex", sans-serif;
+  font-size: 0.8rem;
+}
+
+/* Number inputs inside focused items */
+.adv-foc .adv-number-sm {
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.adv-vdivider {
+  width: 1px;
+  background: var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.adv-foc-grow .adv-dropdown {
+  width: 100%;
+}
+
+.adv-panel--grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  align-content: start;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.adv-panel--grid > .adv-sectioncontainer {
+  margin-bottom: 0;
+  min-width: 0;
+  box-shadow: none;
+}
+
+.adv-panel--grid .adv-seg-group {
+  flex-shrink: 1;
+}
+
+.adv-panel--grid .adv-seg-btn {
+  min-width: 0;
+}
+
+.adv-panel--grid .adv-cadence-mode-toggle .adv-seg-btn {
+  min-width: 0;
+}
+
+.adv-panel--grid .adv-key-target-box {
+  min-width: 0;
+  width: auto;
+}

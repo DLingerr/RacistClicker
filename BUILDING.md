@@ -11,7 +11,7 @@ This project is Windows-first. The maintained desktop build path uses the Rust `
 ## Setup
 
 ```powershell
-git clone https://github.com/Blur009/Blur-AutoClicker.git
+git clone https://github.com/DLingerr/RacistClicker.git
 cd RacistClicker
 npm install
 rustup default stable-x86_64-pc-windows-msvc
@@ -45,7 +45,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-portable.ps1
 The zip is written to `RacistClicker-v<version>-portable.zip` in the repo
 root. Running the script locally without `-Tag` defaults the tag to `dev`,
 producing `RacistClicker-vdev-portable.zip`; CI passes the real tag (e.g.
-`-Tag v3.9.1`) so the version in the filename is correct. Portable mode keeps
+`-Tag v1.0.0`) so the version in the filename is correct. Portable mode keeps
 all app data (settings, stats, logs, WebView2 user data) inside a `Data/`
 folder next to the exe; there is no in-app auto-update — users download new
 versions from GitHub Releases.

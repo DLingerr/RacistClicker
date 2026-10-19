@@ -37,7 +37,7 @@ fn stats_file_path() -> PathBuf {
     }
     let app_data = std::env::var("APPDATA").unwrap_or_else(|_| ".".to_string());
     PathBuf::from(app_data)
-        .join("BlurAutoClicker")
+        .join("RacistClicker")
         .join("stats.csv")
 }
 

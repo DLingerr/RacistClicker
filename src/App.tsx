@@ -649,11 +649,7 @@ export default function App() {
         preset?: PresetDefinition;
       };
 
-      if (
-        (parsed.type !== "racistclicker-preset" &&
-          parsed.type !== "blur-autoclicker-preset") ||
-        !parsed.preset
-      ) {
+      if (parsed.type !== "racistclicker-preset" || !parsed.preset) {
         return null;
       }
 
@@ -879,11 +875,14 @@ export default function App() {
       setDropdownOverflowBottom(nextOverflow);
     };
 
-    window.addEventListener("blur-dropdown-overflow", handleDropdownOverflow);
+    window.addEventListener(
+      "racistclicker-dropdown-overflow",
+      handleDropdownOverflow,
+    );
 
     return () => {
       window.removeEventListener(
-        "blur-dropdown-overflow",
+        "racistclicker-dropdown-overflow",
         handleDropdownOverflow,
       );
     };

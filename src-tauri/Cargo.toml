@@ -1,9 +1,8 @@
 [package]
 name = "RacistClicker"
-version = "3.9.6"
+version = "1.0.0"
 description = "RacistClicker - accuracy and performance focused auto clicker for Windows."
-authors = ["Blur009"]
-license = "GPL-3.0"
+authors = ["DLingerr"]
 edition = "2021"
 rust-version = "1.97.1"
 

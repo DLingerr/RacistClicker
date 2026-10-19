@@ -1,7 +1,7 @@
 {
   "name": "racistclicker",
   "private": true,
-  "version": "3.9.6",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "tauri dev",

@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a problem in Blur Auto Clicker
+description: Report a problem in RacistClicker
 title: "[Bug]: "
 labels:
   - bug
@@ -20,8 +20,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: Blur Auto Clicker version
-      placeholder: "Example: 3.5.0"
+      label: RacistClicker version
+      placeholder: "Example: 1.0.0"
     validations:
       required: true
 

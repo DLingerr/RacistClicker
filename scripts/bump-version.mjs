@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 //─────────────────────────────────────────────
 // THIS IS A SCRIPT FOR EASILY BUMPING VERSION NUMBERS.
-// THIS SCRIPT MAY ONLY BE USED BY THE PERSON RESPONSIBLE FOR RELEASING UPDATES (BLUR009).
+// THIS SCRIPT MAY ONLY BE USED BY THE PERSON RESPONSIBLE FOR RELEASING UPDATES.
 // PLEASE DO NOT BUMP VERSION NUMBERS AS A CONTRIBUTER.
 // Made by AI
 // command:
@@ -13,7 +13,7 @@ const newVersion = process.argv[2];
 
 if (!newVersion || !/^\d+\.\d+\.\d+$/.test(newVersion)) {
   console.error("Usage: node scripts/bump-version.mjs <semver>");
-  console.error("  e.g.  node scripts/bump-version.mjs 3.10.0");
+  console.error("  e.g.  node scripts/bump-version.mjs 1.1.0");
   process.exit(1);
 }
 

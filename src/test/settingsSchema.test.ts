@@ -6,7 +6,7 @@ import {
 } from "../settingsSchema";
 import type { Settings } from "../settingsSchema";
 
-const VERSION = "3.9.2";
+const VERSION = "1.0.2";
 
 describe("background blur settings", () => {
   const BLUR_FIELDS = [
@@ -35,7 +35,7 @@ describe("background blur settings", () => {
 
   it("fills missing background blur keys with 0 for legacy saved settings", () => {
     const legacy: Partial<Settings> = {
-      version: "3.9.1",
+      version: "1.0.1",
       clickSpeed: 25,
       clickInterval: "s",
       panelBlur: 5,

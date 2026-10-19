@@ -432,7 +432,7 @@ const HotkeyCaptureInput = forwardRef<HotkeyCaptureInputHandle, Props>(
         : reserved
           ? "This hotkey may conflict with system shortcuts"
           : value
-            ? "Hotkey works even when Blur is minimized"
+            ? "Hotkey works even when RacistClicker is minimized"
             : undefined;
 
     return (

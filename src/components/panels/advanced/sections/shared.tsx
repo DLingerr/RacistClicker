@@ -417,7 +417,7 @@ export function AdvDropdown({
     }
 
     window.dispatchEvent(
-      new CustomEvent("blur-dropdown-overflow", {
+      new CustomEvent("racistclicker-dropdown-overflow", {
         detail: {
           active: open,
           bottom: open ? windowOverflowBottom : 0,
@@ -427,7 +427,7 @@ export function AdvDropdown({
 
     return () => {
       window.dispatchEvent(
-        new CustomEvent("blur-dropdown-overflow", {
+        new CustomEvent("racistclicker-dropdown-overflow", {
           detail: {
             active: false,
             bottom: 0,

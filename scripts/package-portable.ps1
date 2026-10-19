@@ -34,7 +34,7 @@ if (-not (Test-Path $resourcesDir)) {
 }
 
 # 2. Stage portable folder.
-$stageDir = Join-Path $env:TEMP ('blur-portable-' + [guid]::NewGuid().ToString('N'))
+$stageDir = Join-Path $env:TEMP ('racistclicker-portable-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Force -Path $stageDir | Out-Null
 
 Copy-Item $exe -Destination (Join-Path $stageDir 'RacistClicker.exe')

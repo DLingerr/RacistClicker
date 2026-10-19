@@ -463,7 +463,7 @@ pub fn current_status(app: &AppHandle) -> ClickerStatusPayload {
 
 // Marshaled to the main thread: `emit` is safe from any thread, but routing
 // through the main thread keeps all status/icon updates on one thread and
-// avoids any cross-thread window API surprises (issue https://github.com/Blur009/Blur-AutoClicker/issues/273).
+// avoids any cross-thread window API surprises.
 pub fn emit_status(app: &AppHandle) {
     let app = app.clone();
     let handle = app.clone();

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { compareVersions, parseChangelog } from "../changelog";
 
-const sample = `# v3.9.2 - 14.08.2026 (d.m.y)
+const sample = `# v1.0.2 - 14.08.2026 (d.m.y)
 
 ## New
 - Added a preview button
@@ -9,12 +9,12 @@ const sample = `# v3.9.2 - 14.08.2026 (d.m.y)
 ## Fixed
 - Fixed a crash on exit
 
-# v3.9.1 - 21.07.2026 (d.m.y)
+# v1.0.1 - 21.07.2026 (d.m.y)
 
 ## Changed
 - Faster click scheduling
 
-# v2.0.0 - 01.01.2026 (d.m.y)
+# v1.0.0 - 01.01.2026 (d.m.y)
 
 ## Info
 
@@ -25,7 +25,7 @@ const sample = `# v3.9.2 - 14.08.2026 (d.m.y)
 describe("parseChangelog", () => {
   it("parses versions and dates", () => {
     const entries = parseChangelog(sample);
-    expect(entries.map((e) => e.version)).toEqual(["3.9.2", "3.9.1", "2.0.0"]);
+    expect(entries.map((e) => e.version)).toEqual(["1.0.2", "1.0.1", "1.0.0"]);
     expect(entries[0].date).toBe("14.08.2026 (d.m.y)");
   });
 
@@ -49,23 +49,23 @@ describe("parseChangelog", () => {
 
 describe("compareVersions", () => {
   it("compares simple versions", () => {
-    expect(compareVersions("3.6.0", "3.9.2")).toBe(-1);
-    expect(compareVersions("3.9.2", "3.6.0")).toBe(1);
-    expect(compareVersions("3.9.2", "3.9.2")).toBe(0);
+    expect(compareVersions("1.0.0", "1.0.2")).toBe(-1);
+    expect(compareVersions("1.0.2", "1.0.0")).toBe(1);
+    expect(compareVersions("1.0.2", "1.0.2")).toBe(0);
   });
 
   it("ignores leading v", () => {
-    expect(compareVersions("v3.9.2", "3.9.1")).toBe(1);
-    expect(compareVersions("3.9.1", "v3.9.2")).toBe(-1);
+    expect(compareVersions("v1.0.2", "1.0.1")).toBe(1);
+    expect(compareVersions("1.0.1", "v1.0.2")).toBe(-1);
   });
 
   it("compares across segment lengths", () => {
-    expect(compareVersions("3.9", "3.9.2")).toBe(-1);
-    expect(compareVersions("3.9.2", "3.9")).toBe(1);
-    expect(compareVersions("3", "3.0.0")).toBe(0);
+    expect(compareVersions("1.0", "1.0.2")).toBe(-1);
+    expect(compareVersions("1.0.2", "1.0")).toBe(1);
+    expect(compareVersions("1", "1.0.0")).toBe(0);
   });
 
   it("handles non-numeric segments as zero", () => {
-    expect(compareVersions("3.9.x", "3.9.2")).toBe(-1);
+    expect(compareVersions("1.0.x", "1.0.2")).toBe(-1);
   });
 });

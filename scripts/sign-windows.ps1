@@ -11,7 +11,7 @@ if (-not (Test-Path -LiteralPath $ArtifactPath)) {
 }
 
 $resolvedArtifactPath = (Resolve-Path -LiteralPath $ArtifactPath).Path
-$mode = $env:BLUR_WINDOWS_SIGNING_MODE
+$mode = $env:RACISTCLICKER_WINDOWS_SIGNING_MODE
 
 if ([string]::IsNullOrWhiteSpace($mode) -or $mode -eq "none") {
     Write-Host "Skipping Windows signing for $resolvedArtifactPath"
@@ -19,13 +19,13 @@ if ([string]::IsNullOrWhiteSpace($mode) -or $mode -eq "none") {
 }
 
 if ($mode -ne "trusted-signing-cli") {
-    Write-Error "Unsupported BLUR_WINDOWS_SIGNING_MODE '$mode'. Supported values: none, trusted-signing-cli."
+    Write-Error "Unsupported RACISTCLICKER_WINDOWS_SIGNING_MODE '$mode'. Supported values: none, trusted-signing-cli."
 }
 
 $requiredEnvVars = @(
-    "BLUR_TRUSTED_SIGNING_ENDPOINT",
-    "BLUR_TRUSTED_SIGNING_ACCOUNT",
-    "BLUR_TRUSTED_SIGNING_PROFILE",
+    "RACISTCLICKER_TRUSTED_SIGNING_ENDPOINT",
+    "RACISTCLICKER_TRUSTED_SIGNING_ACCOUNT",
+    "RACISTCLICKER_TRUSTED_SIGNING_PROFILE",
     "AZURE_CLIENT_ID",
     "AZURE_CLIENT_SECRET",
     "AZURE_TENANT_ID"
@@ -42,16 +42,16 @@ if ($missingEnvVars.Count -gt 0) {
     Write-Error ("Missing required environment variables for trusted-signing-cli: " + ($missingEnvVars -join ", "))
 }
 
-$description = if ([string]::IsNullOrWhiteSpace($env:BLUR_TRUSTED_SIGNING_DESCRIPTION)) {
+$description = if ([string]::IsNullOrWhiteSpace($env:RACISTCLICKER_TRUSTED_SIGNING_DESCRIPTION)) {
     "RacistClicker"
 } else {
-    $env:BLUR_TRUSTED_SIGNING_DESCRIPTION
+    $env:RACISTCLICKER_TRUSTED_SIGNING_DESCRIPTION
 }
 
 & trusted-signing-cli `
-    -e $env:BLUR_TRUSTED_SIGNING_ENDPOINT `
-    -a $env:BLUR_TRUSTED_SIGNING_ACCOUNT `
-    -c $env:BLUR_TRUSTED_SIGNING_PROFILE `
+    -e $env:RACISTCLICKER_TRUSTED_SIGNING_ENDPOINT `
+    -a $env:RACISTCLICKER_TRUSTED_SIGNING_ACCOUNT `
+    -c $env:RACISTCLICKER_TRUSTED_SIGNING_PROFILE `
     -d $description `
     $resolvedArtifactPath
 

@@ -22,7 +22,6 @@ import {
   isLegacyVideoExtension,
   resolveBackgroundSource,
 } from "./backgroundMedia";
-import UpdateBanner from "./components/Updatebanner";
 import {
   buildHotkeyWithHeld,
   canonicalizeHotkeyForBackend,
@@ -54,6 +53,9 @@ import {
   loadSettings,
   saveSettings,
 } from "./store";
+import "./midnightCyan.css";
+import "./ember.css";
+import "./light.css";
 
 void initAppVersion();
 
@@ -81,15 +83,14 @@ type DropdownOverflowDetail = {
   bottom?: number;
 };
 
-function getPanelSize(tab: Tab, hasUpdate: boolean) {
-  const extra = hasUpdate ? 30 : 0;
+function getPanelSize(tab: Tab) {
   if (tab === "simple") {
-    return { width: 750, height: 175 + extra };
+    return { width: 750, height: 175 };
   }
-  if (tab === "settings") return { width: 700, height: 720 + extra };
-  if (tab === "zones") return { width: 700, height: 700 + extra };
-  if (tab === "click-points") return { width: 550, height: 600 + extra };
-  return { width: 900, height: 469 + extra };
+  if (tab === "settings") return { width: 700, height: 720 };
+  if (tab === "zones") return { width: 700, height: 700 };
+  if (tab === "click-points") return { width: 550, height: 600 };
+  return { width: 900, height: 469 };
 }
 
 async function getClampedPanelSize(
@@ -154,26 +155,6 @@ function wait(ms: number) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
 }
 
-type UpdateCheckResult = {
-  updateAvailable: boolean;
-  currentVersion: string;
-  latestVersion: string;
-};
-
-async function checkForUpdates(): Promise<UpdateCheckResult | null> {
-  try {
-    return await invoke<UpdateCheckResult>("check_for_updates");
-  } catch (err) {
-    error(
-      JSON.stringify({
-        source: "App.updateCheck",
-        error: JSON.stringify(err),
-      }),
-    );
-    return null;
-  }
-}
-
 function tabSuffix(t: Tab): string {
   if (t === "click-points") return "ClickPoints";
   return t.charAt(0).toUpperCase() + t.slice(1);
@@ -192,13 +173,6 @@ export default function App() {
   const [settingsLoaded, setSettingsLoaded] = useState(false);
   const [status, setStatus] = useState<ClickerStatus>(DEFAULT_STATUS);
   const [appInfo, setAppInfo] = useState<AppInfo>(DEFAULT_APP_INFO);
-  const [updateInfo, setUpdateInfo] = useState<{
-    currentVersion: string;
-    latestVersion: string;
-  } | null>(null);
-  const [updateCheckStatus, setUpdateCheckStatus] = useState<
-    "idle" | "checking" | "available" | "unavailable" | "error"
-  >("idle");
   const [dropdownOverflowBottom, setDropdownOverflowBottom] = useState(0);
   const [settingsInitialTab, setSettingsInitialTab] = useState<
     string | undefined
@@ -214,7 +188,6 @@ export default function App() {
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const resizeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const toggleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const cooldownTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const mountedRef = useRef(false);
 
@@ -778,15 +751,15 @@ export default function App() {
           setTab(hydratedSettings.lastPanel);
           setSettings(hydratedSettings);
           {
-            const theme = hydratedSettings.theme ?? "dark";
+            const theme = hydratedSettings.theme ?? "ember";
             document.documentElement.dataset.theme = theme;
             applyAccentTheme(hydratedSettings.accentColor, theme);
             invoke("set_accent_color", {
               color: hydratedSettings.accentColor,
               theme,
-              iconEnabled: hydratedSettings.taskbarIconEnabled,
-              iconTheme: hydratedSettings.taskbarIconTheme,
-              iconColor: hydratedSettings.taskbarIconColor,
+              iconEnabled: true,
+              iconTheme: "auto",
+              iconColor: "default",
             });
           }
           setAppInfo(loadedAppInfo);
@@ -905,7 +878,7 @@ export default function App() {
         const textScale = await invoke<number>("get_text_scale_factor");
         document.documentElement.style.fontSize = `${16 * textScale}px`;
 
-        const preferredSize = getPanelSize(tab, !!updateInfo);
+        const preferredSize = getPanelSize(tab);
         const { width, height } = await getClampedPanelSize(
           preferredSize,
           textScale,
@@ -1038,84 +1011,24 @@ export default function App() {
     };
   }, [
     tab,
-    updateInfo,
     dropdownOverflowBottom,
     settingsLoaded,
     settings.statusBarEnabled,
   ]);
 
   useEffect(() => {
-    if (import.meta.env.DEV) return;
-
-    const check = async () => {
-      const result = await checkForUpdates();
-      if (result?.updateAvailable) {
-        setUpdateInfo({
-          currentVersion: result.currentVersion,
-          latestVersion: result.latestVersion,
-        });
-        setUpdateCheckStatus("available");
-      }
-    };
-
-    check();
-    const interval = setInterval(check, 60 * 60 * 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleCheckForUpdate = async () => {
-    setUpdateCheckStatus("checking");
-    const result = await checkForUpdates();
-    if (result) {
-      if (result.updateAvailable) {
-        setUpdateCheckStatus("available");
-        setUpdateInfo({
-          currentVersion: result.currentVersion,
-          latestVersion: result.latestVersion,
-        });
-      } else {
-        setUpdateCheckStatus("unavailable");
-        setUpdateInfo(null);
-      }
-    } else {
-      setUpdateCheckStatus("error");
-      setUpdateInfo(null);
-    }
-    if (cooldownTimerRef.current) {
-      clearTimeout(cooldownTimerRef.current);
-    }
-    cooldownTimerRef.current = setTimeout(() => {
-      setUpdateCheckStatus((prev) => (prev === "available" ? prev : "idle"));
-    }, 60000);
-  };
-
-  useEffect(() => {
-    return () => {
-      if (cooldownTimerRef.current) {
-        clearTimeout(cooldownTimerRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const theme = settings.theme ?? "dark";
+    const theme = settings.theme ?? "ember";
     document.documentElement.dataset.theme = theme;
     applyAccentTheme(settings.accentColor, theme);
 
     invoke("set_accent_color", {
       color: settings.accentColor,
       theme,
-      iconEnabled: settings.taskbarIconEnabled,
-      iconTheme: settings.taskbarIconTheme,
-      iconColor: settings.taskbarIconColor,
+      iconEnabled: true,
+      iconTheme: "auto",
+      iconColor: "default",
     });
-  }, [
-    settings.accentColor,
-    settings.theme,
-    settings.taskbarIconEnabled,
-    settings.taskbarIconTheme,
-    settings.taskbarIconColor,
-  ]);
+  }, [settings.accentColor, settings.theme]);
 
   useEffect(() => {
     document.documentElement.lang = "en";
@@ -1136,18 +1049,26 @@ export default function App() {
     const colors =
       settings.theme === "light"
         ? {
-            base: "229, 223, 231",
+            base: "250, 250, 255",
             surface: "255, 255, 255",
-            elevated: "242, 242, 242",
-            input: "217, 217, 217",
-            inputOff: "217, 217, 217",
+            elevated: "241, 242, 250",
+            input: "243, 244, 251",
+            inputOff: "238, 240, 248",
+          }
+        : settings.theme === "ember"
+        ? {
+            base: "11, 12, 14",
+            surface: "20, 21, 24",
+            elevated: "30, 33, 38",
+            input: "24, 26, 30",
+            inputOff: "20, 22, 25",
           }
         : {
-            base: "12, 12, 14",
-            surface: "26, 26, 26",
-            elevated: "38, 38, 38",
-            input: "59, 59, 59",
-            inputOff: "51, 51, 51",
+            base: "11, 15, 20",
+            surface: "17, 24, 39",
+            elevated: "31, 41, 55",
+            input: "22, 32, 46",
+            inputOff: "17, 25, 37",
           };
 
     root.style.setProperty(
@@ -1357,11 +1278,6 @@ export default function App() {
 
   const handleGoToPresets = useCallback(() => {
     setSettingsInitialTab("presets");
-    setTab("settings");
-  }, []);
-
-  const handleGoToVersionInfo = useCallback(() => {
-    setSettingsInitialTab("system");
     setTab("settings");
   }, []);
 
@@ -1725,14 +1641,6 @@ export default function App() {
         statusBarHidden={!settings.statusBarEnabled}
         masterOff={!status.masterAllowed}
       />
-      {updateInfo && (
-        <UpdateBanner
-          key={`${updateInfo.currentVersion}:${updateInfo.latestVersion}`}
-          currentVersion={updateInfo.currentVersion}
-          latestVersion={updateInfo.latestVersion}
-          portable={appInfo.portable}
-        />
-      )}
       <main className="panel-area">
         {tab === "simple" && (
           <SimplePanel settings={settings} update={updateSettings} />
@@ -1773,8 +1681,6 @@ export default function App() {
             onImportPreset={handleImportPreset}
             onToggleAlwaysOnTop={handleToggleAlwaysOnTop}
             onReset={handleResetSettings}
-            updateCheckStatus={updateCheckStatus}
-            onCheckForUpdate={handleCheckForUpdate}
             initialSettingsTab={settingsInitialTab}
             onInitialTabConsumed={handleInitialTabConsumed}
           />
@@ -1795,7 +1701,6 @@ export default function App() {
           clickLimitEnabled={settings.clickLimitEnabled}
           timeLimitMs={computeTimeLimitMs()}
           onGoToPresets={handleGoToPresets}
-          onGoToVersionInfo={handleGoToVersionInfo}
         />
       )}
     </div>

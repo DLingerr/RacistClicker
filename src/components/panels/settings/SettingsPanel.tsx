@@ -32,9 +32,6 @@ interface Props {
   onImportPreset: () => Promise<boolean | null>;
   onToggleAlwaysOnTop: () => Promise<void>;
   onReset: () => Promise<void>;
-  updateCheckStatus:
-    "idle" | "checking" | "available" | "unavailable" | "error";
-  onCheckForUpdate: () => void;
   initialSettingsTab?: string;
   onInitialTabConsumed?: () => void;
 }
@@ -54,8 +51,6 @@ export default function SettingsPanel({
   onImportPreset,
   onToggleAlwaysOnTop,
   onReset,
-  updateCheckStatus,
-  onCheckForUpdate,
   initialSettingsTab,
   onInitialTabConsumed,
 }: Props) {
@@ -281,12 +276,7 @@ export default function SettingsPanel({
           />
         )}
         {activeTab === "system" && (
-          <SystemSection
-            appInfo={appInfo}
-            updateCheckStatus={updateCheckStatus}
-            onCheckForUpdate={onCheckForUpdate}
-            onReset={onReset}
-          />
+          <SystemSection onReset={onReset} />
         )}
       </div>
       </div>

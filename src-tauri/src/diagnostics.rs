@@ -1,20 +1,8 @@
-use serde::Serialize;
 use std::path::PathBuf;
 
 #[cfg(test)]
 std::thread_local! {
     static TEST_DATA_DIR: std::cell::RefCell<Option<PathBuf>> = const { std::cell::RefCell::new(None) };
-}
-
-#[derive(Clone, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct DiagnosticsInfo {
-    pub root: String,
-    pub logs: String,
-    pub crash_reports: String,
-    pub panic_reports: String,
-    pub app_events: String,
-    pub exports: String,
 }
 
 fn data_dir() -> Option<PathBuf> {
@@ -56,10 +44,6 @@ pub fn app_events_dir() -> Option<PathBuf> {
     diagnostics_root().map(|d| d.join("AppEvents"))
 }
 
-pub fn exports_dir() -> Option<PathBuf> {
-    diagnostics_root().map(|d| d.join("Exports"))
-}
-
 pub fn ensure_diagnostics_dirs() -> std::io::Result<()> {
     let root = diagnostics_root().ok_or_else(|| {
         std::io::Error::new(
@@ -71,7 +55,6 @@ pub fn ensure_diagnostics_dirs() -> std::io::Result<()> {
     std::fs::create_dir_all(root.join("CrashReports"))?;
     std::fs::create_dir_all(root.join("PanicReports"))?;
     std::fs::create_dir_all(root.join("AppEvents"))?;
-    std::fs::create_dir_all(root.join("Exports"))?;
     Ok(())
 }
 
@@ -85,18 +68,6 @@ pub fn write_panic_report(report: &str) {
         let path = dir.join(format!("panic_{ts}.txt"));
         let _ = std::fs::write(&path, report);
     }
-}
-
-pub fn get_diagnostics_info() -> Option<DiagnosticsInfo> {
-    let root = diagnostics_root()?;
-    Some(DiagnosticsInfo {
-        root: root.to_string_lossy().to_string(),
-        logs: root.join("Logs").to_string_lossy().to_string(),
-        crash_reports: root.join("CrashReports").to_string_lossy().to_string(),
-        panic_reports: root.join("PanicReports").to_string_lossy().to_string(),
-        app_events: root.join("AppEvents").to_string_lossy().to_string(),
-        exports: root.join("Exports").to_string_lossy().to_string(),
-    })
 }
 
 #[cfg(test)]
@@ -124,7 +95,6 @@ mod tests {
         assert_eq!(crash_reports_dir().unwrap(), root.join("CrashReports"));
         assert_eq!(panic_reports_dir().unwrap(), root.join("PanicReports"));
         assert_eq!(app_events_dir().unwrap(), root.join("AppEvents"));
-        assert_eq!(exports_dir().unwrap(), root.join("Exports"));
     }
 
     #[test]
@@ -158,7 +128,6 @@ mod tests {
             assert!(root.join("CrashReports").exists());
             assert!(root.join("PanicReports").exists());
             assert!(root.join("AppEvents").exists());
-            assert!(root.join("Exports").exists());
         });
     }
 
@@ -185,39 +154,5 @@ mod tests {
                 "write_panic_report should create a file in PanicReports"
             );
         });
-    }
-
-    #[test]
-    fn diagnostics_info_contains_all_fields() {
-        let info = get_diagnostics_info().expect("diagnostics info should resolve");
-        assert!(!info.root.is_empty());
-        assert!(!info.logs.is_empty());
-        assert!(!info.crash_reports.is_empty());
-        assert!(!info.panic_reports.is_empty());
-        assert!(!info.app_events.is_empty());
-        assert!(!info.exports.is_empty());
-        assert!(info.logs.contains("Logs"));
-        assert!(info.crash_reports.contains("CrashReports"));
-        assert!(info.panic_reports.contains("PanicReports"));
-        assert!(info.app_events.contains("AppEvents"));
-        assert!(info.exports.contains("Exports"));
-    }
-
-    #[test]
-    fn diagnostics_info_serializes_camel_case() {
-        let info = get_diagnostics_info().unwrap();
-        let json = serde_json::to_string(&info).unwrap();
-        assert!(
-            json.contains("\"panicReports\""),
-            "should be camelCase: {json}"
-        );
-        assert!(
-            json.contains("\"crashReports\""),
-            "should be camelCase: {json}"
-        );
-        assert!(
-            json.contains("\"appEvents\""),
-            "should be camelCase: {json}"
-        );
     }
 }

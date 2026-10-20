@@ -338,11 +338,6 @@
     overflow-y: auto;
   }
 }
-[data-theme="light"] .settings-panel-border {
-  border-top-color: rgb(166, 166, 166);
-  border-left-color: rgb(166, 166, 166);
-  border-right-color: rgb(166, 166, 166);
-}
 
 .settings-section-heading {
   display: flex;
@@ -457,26 +452,6 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
-}
-
-.check-update-btn {
-  min-width: 9rem;
-  text-align: center;
-}
-
-.changelog-toggle-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  flex-shrink: 0;
-}
-
-.changelog-arrow {
-  transition: transform 0.15s ease;
-}
-
-.changelog-arrow.open {
-  transform: rotate(90deg);
 }
 
 .settings-seg-group {
@@ -1184,8 +1159,8 @@
 }
 
 .settings-proc-checkbox:checked {
-  background: #3a8a5c;
-  border-color: #3a8a5c;
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
 }
 
 .settings-proc-checkbox:checked::after {

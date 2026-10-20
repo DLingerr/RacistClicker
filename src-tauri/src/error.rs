@@ -21,9 +21,6 @@ pub enum AppError {
     #[error("{0}")]
     State(String),
 
-    #[error("{0}")]
-    Network(String),
-
     #[error(transparent)]
     Io(#[from] std::io::Error),
 
@@ -76,10 +73,6 @@ impl Serialize for AppError {
             },
             AppError::State(msg) => ErrorPayload {
                 code: "STATE_ERROR",
-                message: msg.clone(),
-            },
-            AppError::Network(msg) => ErrorPayload {
-                code: "NETWORK_ERROR",
                 message: msg.clone(),
             },
             AppError::Io(err) => ErrorPayload {
@@ -163,14 +156,6 @@ mod tests {
         let val = serde_json::to_value(&err).unwrap();
         assert_eq!(val["code"], "STATE_ERROR");
         assert_eq!(val["message"], "bad state");
-    }
-
-    #[test]
-    fn app_error_network_serializes_correctly() {
-        let err = AppError::Network("timeout".into());
-        let val = serde_json::to_value(&err).unwrap();
-        assert_eq!(val["code"], "NETWORK_ERROR");
-        assert_eq!(val["message"], "timeout");
     }
 
     #[test]

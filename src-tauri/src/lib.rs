@@ -14,7 +14,6 @@ mod hotkeys;
 mod icon;
 mod overlay;
 mod ui_commands;
-mod updates;
 mod window_lifecycle;
 
 pub use crate::app_state::ClickerStatusPayload;
@@ -485,10 +484,6 @@ pub fn run() {
             #[cfg(windows)]
             set_app_aumid();
 
-            if !crate::portable::is_portable() {
-                app.handle().plugin(tauri_plugin_updater::Builder::new().build())?;
-            }
-
             if let Err(e) = create_main_window(app) {
                 log::error!("[Window] Failed to create main window: {e}");
                 #[cfg(target_os = "windows")]
@@ -535,7 +530,7 @@ pub fn run() {
             }
             setup_tray(&handle)?;
             crate::icon::set_icon_theme(
-                &handle, "#22c55e", "dark", true, "auto", "theme",
+                &handle, "#ff8a3d", "ember", true, "auto", "default",
             );
             spawn_overlay_auto_hide(&handle);
             spawn_start_zone_monitor(&handle);
@@ -565,8 +560,6 @@ pub fn run() {
             ui_commands::cancel_custom_stop_zone_pick,
             ui_commands::get_app_info,
             ui_commands::get_portable_info,
-            updates::update_checker::check_for_updates,
-            updates::update_checker::fetch_changelog,
             overlay::hide_overlay,
             ui_commands::hide_main_window,
             ui_commands::quit_app,
@@ -574,9 +567,6 @@ pub fn run() {
             ui_commands::set_autostart_enabled,
             ui_commands::list_processes,
             ui_commands::was_autostart_launch,
-            ui_commands::get_diagnostics_info,
-            ui_commands::open_diagnostics_folder,
-            ui_commands::export_diagnostics_bundle,
             ui_commands::set_accent_color,
             ui_commands::debug_trigger_panic,
             ui_commands::debug_trigger_crash,

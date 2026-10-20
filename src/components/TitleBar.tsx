@@ -189,7 +189,7 @@ const TAB_ITEMS: readonly TabItem[] = [
   {
     value: "simple",
     label: "Simple",
-    color: "var(--accent)",
+    color: "var(--accent-text)",
     activeBg: "var(--accent-soft)",
     activeFocusRing: "var(--accent-ring)",
     icon: ({ active }) => <SimpleIcon active={active} />,
@@ -197,25 +197,25 @@ const TAB_ITEMS: readonly TabItem[] = [
   {
     value: "advanced",
     label: "Advanced",
-    color: "var(--accent-yellow)",
-    activeBg: "rgba(254, 188, 47, 0.1)",
-    activeFocusRing: "rgba(254, 188, 47, 0.25)",
+    color: "var(--accent-text)",
+    activeBg: "var(--accent-soft)",
+    activeFocusRing: "var(--accent-ring)",
     icon: ({ active }) => <AdvancedIcon active={active} />,
   },
   {
     value: "zones",
     label: "Zones",
-    color: "hsl(208 85% 58%)",
-    activeBg: "hsla(208, 85%, 58%, 0.14)",
-    activeFocusRing: "hsla(208, 85%, 58%, 0.35)",
+    color: "var(--accent-text)",
+    activeBg: "var(--accent-soft)",
+    activeFocusRing: "var(--accent-ring)",
     icon: ({ active }) => <ZonesIcon active={active} />,
   },
   {
     value: "click-points",
     label: "Click Points",
-    color: "hsl(180 75% 40%)",
-    activeBg: "hsla(180, 75%, 40%, 0.14)",
-    activeFocusRing: "hsla(180, 75%, 40%, 0.35)",
+    color: "var(--accent-text)",
+    activeBg: "var(--accent-soft)",
+    activeFocusRing: "var(--accent-ring)",
     icon: ({ active }) => <ClickPointsIcon active={active} />,
   },
 ] as const;
@@ -303,6 +303,17 @@ const TitleBar = memo(function TitleBar({
       </div>
 
       <div className="title-wrapper">
+        {(["ember", "cyan", "light"] as const).map((name) => (
+          <img
+            key={name}
+            className={`title-logo title-logo--${name}`}
+            src={`/logos/${name}.png`}
+            width={22}
+            height={22}
+            alt=""
+            draggable={false}
+          />
+        ))}
         <AnimatedTitle
           statusBarHidden={statusBarHidden}
           stopReason={stopReason}

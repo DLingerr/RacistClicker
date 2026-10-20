@@ -12,22 +12,29 @@ use crate::{ClickerState, IconState};
 
 // `include_bytes!` resolves relative to this file; CARGO_MANIFEST_DIR is
 // `src-tauri`, so the assets live in `src-tauri/icons`.
-const ICON_ACTIVATED_DARK: &[u8] = include_bytes!(concat!(
-    env!("CARGO_MANIFEST_DIR"),
-    "/icons/icon-activated-dark.ico"
-));
-const ICON_ACTIVATED_LIGHT: &[u8] = include_bytes!(concat!(
-    env!("CARGO_MANIFEST_DIR"),
-    "/icons/Icon-activated-light.ico"
-));
-const ICON_DEACTIVATED_DARK: &[u8] = include_bytes!(concat!(
-    env!("CARGO_MANIFEST_DIR"),
-    "/icons/icon-deactivated-dark.ico"
-));
-const ICON_DEACTIVATED_LIGHT: &[u8] = include_bytes!(concat!(
-    env!("CARGO_MANIFEST_DIR"),
-    "/icons/Icon-deactivated-light.ico"
-));
+// One logo per theme. Ember is the fallback and is also what the installer /
+// executable icon is built from (see tauri.conf.json), because those are fixed
+// at build time and cannot follow the theme.
+const LOGO_EMBER: &[u8] =
+    include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/icons/logo-ember.png"));
+const LOGO_CYAN: &[u8] =
+    include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/icons/logo-cyan.png"));
+const LOGO_LIGHT: &[u8] =
+    include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/icons/logo-light.png"));
+const ICON_ACTIVATED_DARK: &[u8] = LOGO_EMBER;
+const ICON_ACTIVATED_LIGHT: &[u8] = LOGO_EMBER;
+const ICON_DEACTIVATED_DARK: &[u8] = LOGO_EMBER;
+const ICON_DEACTIVATED_LIGHT: &[u8] = LOGO_EMBER;
+
+fn logo_for_theme(theme: &str) -> Option<&'static [u8]> {
+    match theme {
+        "ember" => Some(LOGO_EMBER),
+        "cyan" => Some(LOGO_CYAN),
+        "light" => Some(LOGO_LIGHT),
+        _ => None,
+    }
+}
+
 const MASK_PNG_BYTES: &[u8] =
     include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/icons/icon-mask.png"));
 
@@ -271,7 +278,7 @@ pub fn init_icon_cache() -> IconCache {
         log::warn!("[icon] failed to decode Icon-deactivated-light.ico");
     }
 
-    let (dark_tint, light_tint) = recompute_tint(true, "theme", "#22c55e");
+    let (dark_tint, light_tint) = recompute_tint(true, "theme", "#ff8a3d");
 
     if dark_tint.is_none() {
         log::warn!("[icon] failed to decode active tint (dark)");
@@ -524,6 +531,12 @@ pub fn set_icon_theme(
         let mut cache = state.icon_cache.lock().unwrap_or_else(poisoned_inner);
         cache.active_tint_dark = dark;
         cache.active_tint_light = light;
+        if let Some(logo) = logo_for_theme(theme).and_then(|b| decode_icon(b).ok()) {
+            cache.activated_dark = Some(logo.clone());
+            cache.activated_light = Some(logo.clone());
+            cache.deactivated_dark = Some(logo.clone());
+            cache.deactivated_light = Some(logo);
+        }
         if cache.active_tint_dark.is_none() && icon_enabled && icon_color == "theme" {
             log::warn!("[icon] recomputed active tint (dark) was empty");
         }

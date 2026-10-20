@@ -15,7 +15,6 @@ interface Props {
   clickLimitEnabled: boolean;
   timeLimitMs: number;
   onGoToPresets: () => void;
-  onGoToVersionInfo: () => void;
 }
 
 const STOP_REASON_TEXTS: Record<string, string> = {
@@ -79,7 +78,6 @@ export default function StatusBar({
   clickLimitEnabled,
   timeLimitMs,
   onGoToPresets,
-  onGoToVersionInfo,
 }: Props) {
   const [elapsedMs, setElapsedMs] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -165,6 +163,15 @@ export default function StatusBar({
   return (
     <div className="status-bar" data-running={running}>
       <div className="status-bar-left">
+        <span className="status-bar-state">
+          <span
+            className="status-dot"
+            data-running={running}
+            data-paused={paused}
+          />
+          {running ? (paused ? "Paused" : "Running") : "Ready"}
+        </span>
+        <span className="status-bar-sep" />
         {activePresetName ? (
           <button
             className="status-bar-preset-btn"
@@ -198,13 +205,7 @@ export default function StatusBar({
         {centerText}
       </div>
       <div className="status-bar-right">
-        <button
-          className="status-bar-version-btn"
-          onClick={onGoToVersionInfo}
-          title="Info"
-        >
-          v{version}
-        </button>
+        <span className="status-bar-version">v{version}</span>
       </div>
     </div>
   );

@@ -1,0 +1,265 @@
+/* ==========================================================================
+   Cyan look (shared base shapes for every theme)
+   Loaded after every component stylesheet; selectors are prefixed with
+   .app-root so they win over the base component styles.
+   Palette: #0B0F14 background, #111827 surface, #1F2937 card,
+            #06B6D4 primary cyan, #14B8A6 teal, #67E8F9 glow,
+            #94A3B8 secondary text, #E2E8F0 primary text.
+   ========================================================================== */
+
+/* ---- Title bar ---------------------------------------------------------- */
+
+.app-root .window-title-background {
+  background: linear-gradient(
+    180deg,
+    var(--bg-surface),
+    color-mix(in srgb, var(--bg-surface) 70%, transparent)
+  );
+  border-bottom-width: 1px;
+}
+
+.app-root .title-wrapper {
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.app-root .title-logo {
+  display: none;
+  flex-shrink: 0;
+  width: 1.375rem;
+  height: 1.375rem;
+  object-fit: contain;
+  user-select: none;
+}
+
+[data-theme="ember"] .app-root .title-logo--ember,
+[data-theme="cyan"] .app-root .title-logo--cyan,
+[data-theme="light"] .app-root .title-logo--light {
+  display: block;
+}
+
+.app-root .window-title {
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.app-root .tab-icon-btn,
+.app-root .settings-button,
+.app-root .window-btn {
+  border-radius: var(--radius-md);
+}
+
+.app-root .tab-icon-btn.active {
+  box-shadow:
+    inset 0 0 0 1px var(--accent-ring),
+    0 0 12px var(--accent-glow-2);
+}
+
+.app-root .settings-button[data-active="true"] {
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  box-shadow:
+    inset 0 0 0 1px var(--accent-ring),
+    0 0 12px var(--accent-glow-2);
+}
+
+.app-root .window-btn.active {
+  color: var(--accent-text);
+}
+
+/* ---- Cards / panels ----------------------------------------------------- */
+
+.app-root .adv-sectioncontainer,
+.app-root .settings-card {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: var(--container-shadow);
+}
+
+.app-root .adv-card-title {
+  letter-spacing: 0;
+  color: var(--text-primary);
+}
+
+.app-root .adv-card-desc,
+.app-root .settings-sublabel {
+  color: var(--text-dim);
+}
+
+.app-root .adv-card-divider {
+  background: var(--border-subtle);
+}
+
+/* ---- Inputs ------------------------------------------------------------- */
+
+.app-root .adv-numbox-sm,
+.app-root .InputBox,
+.app-root .settings-bg-input,
+.app-root .settings-proc-search,
+.app-root .preset-rename-input {
+  background: var(--bg-input);
+  border-color: var(--border);
+}
+
+.app-root .adv-numbox-sm:hover,
+.app-root .adv-numbox-sm:focus-within,
+.app-root .InputBox:focus-within {
+  border-color: var(--accent-ring);
+  box-shadow: 0 0 10px var(--accent-glow-2);
+}
+
+/* ---- Segmented / on-off groups ------------------------------------------ */
+
+.app-root .adv-seg-group,
+.app-root .adv-toggle-group,
+.app-root .settings-seg-group {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.app-root .adv-seg-group:hover,
+.app-root .adv-toggle-group:hover {
+  border-color: var(--accent-ring);
+}
+
+.app-root .adv-seg-btn.active,
+.app-root .adv-seg-btn-dynamic.active,
+.app-root .adv-toggle-on.active,
+.app-root .adv-toggle-off.active,
+.app-root .settings-seg-btn.active {
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  box-shadow:
+    inset 0 0 0 1px var(--accent-ring),
+    0 0 10px var(--accent-glow-2);
+}
+
+/* ---- Buttons ------------------------------------------------------------ */
+
+.app-root .adv-secondary-btn,
+.app-root .settings-btn-primary,
+.app-root .settings-btn-secondary {
+  border-color: var(--border);
+  border-radius: var(--radius-md);
+}
+
+.app-root .adv-secondary-btn:hover,
+.app-root .settings-btn-primary:hover,
+.app-root .settings-btn-secondary:hover {
+  border-color: var(--accent-ring);
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  box-shadow: 0 0 10px var(--accent-glow-2);
+}
+
+.app-root .adv-click-points-pick-btn.adv-secondary-btn {
+  color: var(--accent-text);
+  box-shadow: inset 0 0 0 1px var(--accent-ring);
+}
+
+/* ---- Toggle switch ------------------------------------------------------ */
+
+.app-root .settings-toggle {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.app-root .settings-toggle.on {
+  background: var(--accent-strong);
+  box-shadow: 0 0 10px var(--accent-glow-1);
+}
+
+.app-root .settings-toggle.off {
+  background: rgb(71, 85, 105);
+}
+
+.app-root .settings-toggle-knob {
+  background: #f1f5f9;
+}
+
+/* ---- Settings sidebar & frame ------------------------------------------- */
+
+.app-root .settings-sidebar {
+  border-right: 1px solid var(--border-subtle);
+}
+
+.app-root .sidebar-tab {
+  border-left: 0;
+  border-radius: var(--radius-md);
+}
+
+.app-root .sidebar-tab:hover {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+.app-root .sidebar-tab.active {
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  box-shadow:
+    inset 0 0 0 1px var(--accent-ring),
+    0 0 12px var(--accent-glow-2);
+}
+
+.app-root .settings-panel-frame {
+  --settings-line: 1px;
+}
+
+.app-root .settings-panel-border {
+  border-top-color: var(--border);
+  border-left-color: var(--border);
+  border-right-color: var(--border);
+}
+
+.app-root .preset-card--active {
+  border-color: var(--accent-ring);
+  box-shadow:
+    inset 0 0 0 1px var(--accent-soft),
+    0 0 12px var(--accent-glow-2);
+}
+
+/* ---- Status bar --------------------------------------------------------- */
+
+.app-root .status-bar {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.app-root .status-bar-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+}
+
+.app-root .status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--status-success);
+  box-shadow: 0 0 6px var(--status-success);
+}
+
+.app-root .status-dot[data-running="true"] {
+  background: var(--accent-text);
+  box-shadow: 0 0 8px var(--accent-glow-1);
+}
+
+.app-root .status-dot[data-running="true"][data-paused="true"] {
+  background: var(--accent-yellow);
+  box-shadow: 0 0 8px var(--accent-yellow);
+}
+
+.app-root .status-bar-sep {
+  width: 1px;
+  height: 0.75rem;
+  margin-inline: 0.5rem;
+  flex-shrink: 0;
+  background: var(--border);
+}
+
+.app-root .status-bar-left {
+  flex: 1;
+}

@@ -59,7 +59,3 @@ cargo fmt --manifest-path src-tauri/Cargo.toml --check
 cargo check --manifest-path src-tauri/Cargo.toml --locked
 cargo test --manifest-path src-tauri/Cargo.toml --locked
 ```
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for pull request guidelines and workflow.

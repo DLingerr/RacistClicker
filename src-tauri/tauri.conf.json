@@ -24,18 +24,9 @@
       }
     }
   },
-  "plugins": {
-    "updater": {
-      "endpoints": [
-        "https://github.com/DLingerr/RacistClicker/releases/latest/download/latest.json"
-      ],
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDg3RURFMDE4RjhFMjZBQ0MKUldUTWF1TDRHT0R0aDdWQ2dLQmpVUTRJR1QvL0x3eUwwY2F5S1V2OWFpTWR1NHZvRjRMb05sY1MK"
-    }
-  },
   "bundle": {
     "active": true,
     "targets": "nsis",
-    "createUpdaterArtifacts": true,
     "publisher": "DLingerr",
     "copyright": "Copyright (c) DLingerr",
     "category": "Utility",
@@ -46,7 +37,7 @@
       "resources/*": ""
     },
     "icon": [
-      "icons/icon-deactivated-dark.ico"
+      "icons/icon.ico"
     ],
     "windows": {
       "webviewInstallMode": {
@@ -55,7 +46,7 @@
       },
       "nsis": {
         "compression": "lzma",
-        "installerIcon": "icons/icon-deactivated-dark.ico"
+        "installerIcon": "icons/icon.ico"
       }
     }
   }

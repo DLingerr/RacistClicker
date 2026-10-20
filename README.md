@@ -4,7 +4,7 @@ A personal auto clicker for Windows with accurate CPS timing, global hotkeys and
 
 ## Download
 
-Installers are on the [Releases page](https://github.com/DLingerr/RacistClicker/releases/latest). The app can check for updates itself from the System tab.
+Installers are on the [Releases page](https://github.com/DLingerr/RacistClicker/releases/latest).
 
 ## Building from source
 

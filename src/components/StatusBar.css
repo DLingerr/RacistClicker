@@ -104,17 +104,8 @@
   white-space: nowrap;
 }
 
-.status-bar-version-btn {
+.status-bar-version {
   font-family: var(--font-family-base);
   font-size: 0.6875rem;
   color: var(--text-dim);
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: color 0.15s ease;
-}
-
-.status-bar-version-btn:hover {
-  color: var(--accent-strong);
 }

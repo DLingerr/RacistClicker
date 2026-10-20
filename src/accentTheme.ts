@@ -21,20 +21,30 @@ function rgba({ r, g, b }: RGB, alpha: number) {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
+function darken({ r, g, b }: RGB, amount: number) {
+  const mix = (c: number) => Math.round(c * (1 - amount));
+  return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`;
+}
+
+function lighten({ r, g, b }: RGB, amount: number) {
+  const mix = (c: number) => Math.round(c + (255 - c) * amount);
+  return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`;
+}
+
 export function applyAccentTheme(accentColor: string, theme: Theme) {
   const root = document.documentElement;
   const rgb = hexToRgb(accentColor);
-  const accentAlpha = theme === "light" ? 0.9 : 0.75;
-  const strongAlpha = theme === "light" ? 1 : 0.92;
-  const softAlpha = theme === "light" ? 0.4 : 0.4;
-  const ringAlpha = theme === "light" ? 0.4 : 0.35;
-  const glowPrimaryAlpha = theme === "light" ? 0.16 : 0.2;
-  const glowSecondaryAlpha = theme === "light" ? 0.08 : 0.12;
+  const ember = theme === "ember";
+  const light = theme === "light";
 
-  root.style.setProperty("--accent", rgba(rgb, accentAlpha));
-  root.style.setProperty("--accent-strong", rgba(rgb, strongAlpha));
-  root.style.setProperty("--accent-soft", rgba(rgb, softAlpha));
-  root.style.setProperty("--accent-ring", rgba(rgb, ringAlpha));
-  root.style.setProperty("--accent-glow-1", rgba(rgb, glowPrimaryAlpha));
-  root.style.setProperty("--accent-glow-2", rgba(rgb, glowSecondaryAlpha));
+  root.style.setProperty("--accent", rgba(rgb, 0.9));
+  root.style.setProperty("--accent-strong", rgba(rgb, 1));
+  root.style.setProperty("--accent-soft", rgba(rgb, ember ? 0.34 : light ? 0.12 : 0.18));
+  root.style.setProperty("--accent-ring", rgba(rgb, ember ? 0.7 : light ? 0.4 : 0.5));
+  root.style.setProperty("--accent-glow-1", rgba(rgb, ember ? 0.4 : light ? 0.25 : 0.35));
+  root.style.setProperty("--accent-glow-2", rgba(rgb, ember ? 0.2 : light ? 0.12 : 0.18));
+  root.style.setProperty(
+    "--accent-text",
+    light ? darken(rgb, 0.1) : lighten(rgb, 0.55),
+  );
 }

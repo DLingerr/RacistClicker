@@ -6,7 +6,7 @@ export type ClickMode = "Toggle" | "Hold";
 export type DutyCycleMode = "Click" | "Hold";
 export type TimeLimitUnit = "s" | "m" | "h";
 export type SavedPanel = "simple" | "advanced" | "zones" | "click-points";
-export type Theme = "dark" | "light";
+export type Theme = "cyan" | "ember" | "light";
 export type IconTheme = "auto" | "dark" | "light";
 export type IconColor = "theme" | "default";
 export type PresetId = string;
@@ -38,7 +38,7 @@ export interface StopZone {
   action: "stop" | "pause" | "start";
 }
 
-export const DEFAULT_ACCENT_COLOR = "#22c55e";
+export const DEFAULT_ACCENT_COLOR = "#ff8a3d";
 export const PRESET_NAME_MAX_LENGTH = 40;
 export const DEFAULT_MAX_CLICK_SPEED = 500;
 export const EXTENDED_MAX_CLICK_SPEED = 1000;
@@ -69,9 +69,20 @@ export const TIME_LIMIT_UNIT_OPTIONS = [
   "h",
 ] as const satisfies ReadonlyArray<TimeLimitUnit>;
 export const THEME_OPTIONS = [
-  "dark",
+  "ember",
+  "cyan",
   "light",
 ] as const satisfies ReadonlyArray<Theme>;
+export const THEME_LABELS: Record<Theme, string> = {
+  cyan: "Cyan",
+  ember: "Ember",
+  light: "Light",
+};
+export const THEME_ACCENT_COLORS: Record<Theme, string> = {
+  cyan: "#06b6d4",
+  ember: "#ff8a3d",
+  light: "#6366f1",
+};
 
 type LimitDef = {
   min?: number;
@@ -368,7 +379,7 @@ const SETTINGS_ONLY_FIELDS = {
     default: { x: null, y: null } as { x: number | null; y: number | null },
   },
   theme: {
-    default: "dark" as Theme,
+    default: "ember" as Theme,
     ui: { section: "appearance", control: "select" },
   },
   alwaysOnTop: {
@@ -1372,6 +1383,7 @@ export function sanitizeSettings(
     defaults.lastPanel,
   );
   settingsOnly.theme = sanitizeTheme(saved.theme, defaults.theme);
+  const hasValidTheme = THEME_OPTIONS.some((t) => t === saved.theme);
   settingsOnly.masterKeybindMode = sanitizeEnum(
     saved.masterKeybindMode,
     defaults.masterKeybindMode,
@@ -1385,6 +1397,9 @@ export function sanitizeSettings(
     saved.accentColor,
     defaults.accentColor,
   );
+  if (!hasValidTheme) {
+    settingsOnly.accentColor = THEME_ACCENT_COLORS[settingsOnly.theme];
+  }
   settingsOnly.accentLines = sanitizeBoolean(
     saved.accentLines,
     defaults.accentLines,

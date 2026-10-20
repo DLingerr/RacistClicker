@@ -8,28 +8,31 @@
 :root {
   --font-family-base: "RobotoFlex", sans-serif;
 
-  --bg-base: rgb(12, 12, 14);
-  --bg-surface: rgb(26, 26, 26);
-  --bg-elevated: rgb(38, 38, 38);
-  --bg-input: rgb(59, 59, 59);
-  --bg-input-off: rgb(51, 51, 51);
+  /* Cyan (base tokens; Ember and Light override them below) */
+  --bg-base: #0b0f14;
+  --bg-surface: rgba(17, 24, 39, 0.92);
+  --bg-elevated: #1f2937;
+  --bg-input: rgb(22, 32, 46);
+  --bg-input-off: rgb(17, 25, 37);
 
-  --border: rgba(251, 254, 254, 0.2);
-  --border-focus: rgba(251, 254, 254, 0.3);
-  --border-subtle: rgba(251, 254, 254, 0.1);
+  --border: rgba(103, 232, 249, 0.24);
+  --border-focus: rgba(103, 232, 249, 0.45);
+  --border-subtle: rgba(103, 232, 249, 0.13);
 
-  --text-primary: rgba(251, 254, 254, 0.9);
-  --text-muted: rgba(251, 254, 254, 0.75);
-  --text-dim: rgba(251, 254, 254, 0.5);
+  --text-primary: #e2e8f0;
+  --text-muted: #b4c0d0;
+  --text-dim: #94a3b8;
 
-  --accent: rgba(25, 194, 51, 0.8);
-  --accent-strong: rgba(25, 194, 51, 0.92);
-  --accent-soft: rgba(25, 194, 51, 0.5);
-  --accent-ring: rgba(25, 194, 51, 0.35);
-  --accent-glow-1: rgba(25, 194, 51, 0.2);
-  --accent-glow-2: rgba(25, 194, 51, 0.12);
-  --accent-yellow: rgba(254, 188, 47, 0.75);
-  --accent-red: rgba(255, 117, 107, 0.75);
+  --accent: rgba(6, 182, 212, 0.9);
+  --accent-strong: rgba(6, 182, 212, 1);
+  --accent-soft: rgba(6, 182, 212, 0.18);
+  --accent-ring: rgba(6, 182, 212, 0.5);
+  --accent-glow-1: rgba(6, 182, 212, 0.35);
+  --accent-glow-2: rgba(6, 182, 212, 0.18);
+  --accent-text: #67e8f9;
+  --accent-teal: #14b8a6;
+  --accent-yellow: rgba(254, 188, 47, 0.85);
+  --accent-red: rgba(255, 117, 107, 0.85);
 
   --danger: rgba(255, 117, 107, 0.95);
 
@@ -37,7 +40,8 @@
   --radius-md: 0.5rem;
   --radius-lg: 1rem;
 
-  --container-shadow: 0 2px 0.5rem rgba(0, 0, 0, 0.3);
+  --container-shadow:
+    inset 0 0 0 1px rgba(103, 232, 249, 0.04), 0 0 18px rgba(6, 182, 212, 0.07);
 
   --font-weight-li: 400;
   --font-weight-md: 600;
@@ -47,50 +51,99 @@
   --font-size-normal: 1rem;
   --font-size-large: 1.25rem;
 
-  --divider-color: rgba(255, 255, 255, 0.25);
+  --divider-color: rgba(103, 232, 249, 0.16);
+
+  --window-border: rgba(103, 232, 249, 0.38);
+  --window-glow-a: rgba(6, 182, 212, 0.2);
+  --window-glow-b: rgba(20, 184, 166, 0.13);
+  --window-inset: rgba(6, 182, 212, 0.12);
+  --window-inset-glow: rgba(6, 182, 212, 0.07);
 
   --update-banner-bg: rgb(88, 70, 29);
   --update-banner-text-fg: rgb(255, 255, 255);
   --update-banner-text-bg: rgb(204, 204, 204);
-  --status-success: rgb(74, 232, 98);
+  --status-success: rgb(16, 185, 129);
   --status-error: rgb(255, 117, 107);
 }
 
+/* Ember: copper on graphite */
+[data-theme="ember"] {
+  --bg-base: #0b0c0e;
+  --bg-surface: rgba(20, 21, 24, 0.94);
+  --bg-elevated: #1e2126;
+  --bg-input: rgb(24, 26, 30);
+  --bg-input-off: rgb(20, 22, 25);
+
+  --border: rgba(255, 138, 61, 0.26);
+  --border-focus: rgba(255, 138, 61, 0.5);
+  --border-subtle: rgba(255, 255, 255, 0.09);
+
+  --text-primary: #f3eee9;
+  --text-muted: #c4bdb6;
+  --text-dim: #9a9aa0;
+
+  --accent: rgba(255, 138, 61, 0.9);
+  --accent-strong: rgba(255, 138, 61, 1);
+  --accent-soft: rgba(255, 138, 61, 0.34);
+  --accent-ring: rgba(255, 138, 61, 0.7);
+  --accent-glow-1: rgba(255, 138, 61, 0.4);
+  --accent-glow-2: rgba(255, 138, 61, 0.2);
+  --accent-text: #ffc08a;
+  --accent-teal: #ff4d1f;
+
+  --container-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  --divider-color: rgba(255, 255, 255, 0.1);
+
+  --window-border: rgba(255, 138, 61, 0.5);
+  --window-glow-a: rgba(255, 77, 31, 0.1);
+  --window-glow-b: rgba(255, 77, 31, 0.14);
+  --window-inset: rgba(255, 138, 61, 0.14);
+  --window-inset-glow: rgba(255, 77, 31, 0.05);
+
+  --status-success: rgb(255, 138, 61);
+}
+
+/* Light: paperlight indigo */
 [data-theme="light"] {
-  --bg-base: rgb(229, 223, 231);
-  --bg-surface: rgb(255, 255, 255);
-  --bg-elevated: rgb(242, 242, 242);
-  --bg-input: rgb(217, 217, 217);
-  --bg-input-off: rgb(217, 217, 217);
+  --bg-base: #fafaff;
+  --bg-surface: rgba(255, 255, 255, 0.96);
+  --bg-elevated: #f1f2fa;
+  --bg-input: rgb(243, 244, 251);
+  --bg-input-off: rgb(238, 240, 248);
 
-  --border: rgb(102, 102, 102);
-  --border-focus: rgb(89, 89, 89);
-  --border-subtle: rgb(166, 166, 166);
+  --border: #e5e7f0;
+  --border-focus: rgba(99, 102, 241, 0.5);
+  --border-subtle: #eceef6;
 
-  --text-primary: rgba(0, 0, 0, 1);
-  --text-muted: rgba(0, 0, 0, 0.85);
-  --text-dim: rgba(0, 0, 0, 0.65);
+  --text-primary: #0f172a;
+  --text-muted: #334155;
+  --text-dim: #6b7280;
 
-  --accent: rgba(18, 135, 35, 0.9);
-  --accent-strong: rgba(18, 135, 35, 1);
-  --accent-soft: rgba(18, 135, 35, 0.5);
-  --accent-ring: rgba(18, 135, 35, 0.4);
-  --accent-glow-1: rgba(18, 135, 35, 0.16);
-  --accent-glow-2: rgba(18, 135, 35, 0.08);
-  --accent-yellow: rgba(178, 122, 1, 0.9);
-  --accent-red: rgba(230, 15, 0, 0.9);
+  --accent: rgba(99, 102, 241, 0.92);
+  --accent-strong: rgba(99, 102, 241, 1);
+  --accent-soft: rgba(99, 102, 241, 0.12);
+  --accent-ring: rgba(99, 102, 241, 0.4);
+  --accent-glow-1: rgba(99, 102, 241, 0.25);
+  --accent-glow-2: rgba(99, 102, 241, 0.12);
+  --accent-text: #5a5de0;
+  --accent-teal: #8b5cf6;
+  --accent-yellow: rgba(180, 110, 0, 0.95);
+  --accent-red: rgba(220, 38, 38, 0.9);
 
-  --danger: rgba(230, 15, 0, 0.95);
+  --danger: rgba(220, 38, 38, 0.95);
 
-  --container-shadow: none;
+  --container-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.05), 0 4px 14px rgba(99, 102, 241, 0.06);
+  --divider-color: #e5e7f0;
 
-  --divider-color: rgba(0, 0, 0, 0.18);
+  --window-border: rgba(99, 102, 241, 0.28);
+  --window-glow-a: rgba(99, 102, 241, 0.12);
+  --window-glow-b: rgba(139, 92, 246, 0.1);
+  --window-inset: transparent;
+  --window-inset-glow: transparent;
 
-  --update-banner-bg: rgba(254, 188, 46, 0.747);
-  --update-banner-text-fg: rgb(0, 0, 0);
-  --update-banner-text-bg: rgb(38, 38, 38);
-  --status-success: rgb(14, 108, 28);
-  --status-error: rgb(184, 12, 0);
+  --status-success: rgb(22, 163, 74);
+  --status-error: rgb(220, 38, 38);
 }
 
 * {
@@ -115,8 +168,22 @@ body {
 
 .app-root {
   border-radius: 8px;
-  border: 2px var(--border-subtle) solid;
-  background: var(--bg-base);
+  border: 1px solid var(--window-border);
+  background:
+    radial-gradient(
+      120% 70% at 50% -15%,
+      var(--window-glow-a),
+      transparent 62%
+    ),
+    radial-gradient(
+      90% 60% at 100% 105%,
+      var(--window-glow-b),
+      transparent 60%
+    ),
+    var(--bg-base);
+  box-shadow:
+    inset 0 0 0 1px var(--window-inset),
+    inset 0 0 48px var(--window-inset-glow);
   width: 100%;
   height: 100%;
   display: flex;

@@ -1,0 +1,119 @@
+/* ==========================================================================
+   Light (paperlight indigo)
+   Colours come from the [data-theme="light"] tokens in index.css; this file
+   only holds the shapes that differ from the dark themes.
+   Palette: #6366F1 indigo, #8B5CF6 violet, #FAFAFF background,
+            #FFFFFF surface, #E5E7F0 border, #0F172A text, #6B7280 muted.
+   ========================================================================== */
+
+[data-theme="light"] .app-root .window-title-background {
+  background: var(--bg-surface);
+}
+
+[data-theme="light"] .app-root .tab-icon-btn.active,
+[data-theme="light"] .app-root .settings-button[data-active="true"] {
+  box-shadow: none;
+  color: var(--accent-text);
+}
+
+/* Cards */
+[data-theme="light"] .app-root .adv-sectioncontainer,
+[data-theme="light"] .app-root .settings-card {
+  background: var(--bg-surface);
+}
+
+/* Inputs are white */
+[data-theme="light"] .app-root .adv-numbox-sm,
+[data-theme="light"] .app-root .InputBox,
+[data-theme="light"] .app-root .settings-bg-input,
+[data-theme="light"] .app-root .settings-proc-search,
+[data-theme="light"] .app-root .preset-rename-input {
+  background: #fff;
+}
+
+[data-theme="light"] .app-root .adv-numbox-sm:hover,
+[data-theme="light"] .app-root .adv-numbox-sm:focus-within,
+[data-theme="light"] .app-root .InputBox:focus-within {
+  box-shadow: 0 0 0 3px var(--accent-glow-2);
+}
+
+/* Selected options: solid indigo, white text */
+[data-theme="light"] .app-root .adv-seg-btn.active,
+[data-theme="light"] .app-root .adv-seg-btn-dynamic.active,
+[data-theme="light"] .app-root .adv-toggle-on.active,
+[data-theme="light"] .app-root .adv-toggle-off.active,
+[data-theme="light"] .app-root .settings-seg-btn.active {
+  background: var(--accent-strong);
+  color: #fff;
+  box-shadow: none;
+}
+
+/* Buttons */
+[data-theme="light"] .app-root .adv-secondary-btn,
+[data-theme="light"] .app-root .settings-btn-primary,
+[data-theme="light"] .app-root .settings-btn-secondary {
+  background: rgba(99, 102, 241, 0.06);
+  color: var(--accent-text);
+}
+
+[data-theme="light"] .app-root .adv-secondary-btn:hover,
+[data-theme="light"] .app-root .settings-btn-primary:hover,
+[data-theme="light"] .app-root .settings-btn-secondary:hover {
+  background: var(--accent-soft);
+  box-shadow: none;
+}
+
+[data-theme="light"] .app-root .adv-click-points-pick-btn.adv-secondary-btn {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+  color: #fff;
+  box-shadow: none;
+}
+
+[data-theme="light"] .app-root .settings-btn-danger {
+  color: var(--danger);
+}
+
+/* Toggles: indigo track, white knob */
+[data-theme="light"] .app-root .settings-toggle {
+  box-shadow: none;
+}
+
+[data-theme="light"] .app-root .settings-toggle.on {
+  background: var(--accent-strong);
+  box-shadow: none;
+}
+
+[data-theme="light"] .app-root .settings-toggle.off {
+  background: #cbd0dc;
+}
+
+[data-theme="light"] .app-root .settings-toggle-knob {
+  background: #fff;
+}
+
+/* Settings sidebar: soft indigo selected row */
+[data-theme="light"] .app-root .sidebar-tab.active {
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  box-shadow: none;
+}
+
+[data-theme="light"] .app-root .sidebar-tab:hover:not(.active) {
+  background: var(--bg-elevated);
+}
+
+[data-theme="light"] .app-root .settings-panel-border {
+  border-top-color: var(--border);
+  border-left-color: var(--border);
+  border-right-color: var(--border);
+}
+
+[data-theme="light"] .app-root .preset-card--active {
+  box-shadow: none;
+}
+
+/* Status bar: green dot stays green */
+[data-theme="light"] .app-root .status-dot {
+  box-shadow: none;
+}

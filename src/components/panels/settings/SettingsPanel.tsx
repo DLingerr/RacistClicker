@@ -241,44 +241,42 @@ export default function SettingsPanel({
         <div className="settings-panel-gutter" />
         <div className="settings-panel-corner-right" />
         <div className="settings-panel-border" />
-      <div className="settings-panel" ref={panelRef} onScroll={handleScroll}>
-        {activeTab === "behavior" && (
-          <BehaviorSection
-            settings={settings}
-            update={update}
-            onToggleAlwaysOnTop={onToggleAlwaysOnTop}
-            portable={appInfo.portable}
-          />
-        )}
-        {activeTab === "appearance" && (
-          <AppearanceSection settings={settings} update={update} />
-        )}
-        {activeTab === "keybinds" && (
-          <KeybindsSection settings={settings} update={update} />
-        )}
-        {activeTab === "process-list" && (
-          <div className="settings-proc-list-wrapper">
-            <ProcessListSection settings={settings} update={update} />
-          </div>
-        )}
-        {activeTab === "presets" && (
-          <PresetsSection
-            settings={settings}
-            running={running}
-            onSavePreset={onSavePreset}
-            onApplyPreset={onApplyPreset}
-            onUpdatePreset={onUpdatePreset}
-            onRenamePreset={onRenamePreset}
-            onDeletePreset={onDeletePreset}
-            onDuplicatePreset={onDuplicatePreset}
-            onExportPreset={onExportPreset}
-            onImportPreset={onImportPreset}
-          />
-        )}
-        {activeTab === "system" && (
-          <SystemSection onReset={onReset} />
-        )}
-      </div>
+        <div className="settings-panel" ref={panelRef} onScroll={handleScroll}>
+          {activeTab === "behavior" && (
+            <BehaviorSection
+              settings={settings}
+              update={update}
+              onToggleAlwaysOnTop={onToggleAlwaysOnTop}
+              portable={appInfo.portable}
+            />
+          )}
+          {activeTab === "appearance" && (
+            <AppearanceSection settings={settings} update={update} />
+          )}
+          {activeTab === "keybinds" && (
+            <KeybindsSection settings={settings} update={update} />
+          )}
+          {activeTab === "process-list" && (
+            <div className="settings-proc-list-wrapper">
+              <ProcessListSection settings={settings} update={update} />
+            </div>
+          )}
+          {activeTab === "presets" && (
+            <PresetsSection
+              settings={settings}
+              running={running}
+              onSavePreset={onSavePreset}
+              onApplyPreset={onApplyPreset}
+              onUpdatePreset={onUpdatePreset}
+              onRenamePreset={onRenamePreset}
+              onDeletePreset={onDeletePreset}
+              onDuplicatePreset={onDuplicatePreset}
+              onExportPreset={onExportPreset}
+              onImportPreset={onImportPreset}
+            />
+          )}
+          {activeTab === "system" && <SystemSection onReset={onReset} />}
+        </div>
       </div>
       <div
         className={`settings-fade ${atBottom ? "settings-fade--hidden" : ""}`}

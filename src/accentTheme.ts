@@ -39,10 +39,22 @@ export function applyAccentTheme(accentColor: string, theme: Theme) {
 
   root.style.setProperty("--accent", rgba(rgb, 0.9));
   root.style.setProperty("--accent-strong", rgba(rgb, 1));
-  root.style.setProperty("--accent-soft", rgba(rgb, ember ? 0.34 : light ? 0.12 : 0.18));
-  root.style.setProperty("--accent-ring", rgba(rgb, ember ? 0.7 : light ? 0.4 : 0.5));
-  root.style.setProperty("--accent-glow-1", rgba(rgb, ember ? 0.4 : light ? 0.25 : 0.35));
-  root.style.setProperty("--accent-glow-2", rgba(rgb, ember ? 0.2 : light ? 0.12 : 0.18));
+  root.style.setProperty(
+    "--accent-soft",
+    rgba(rgb, ember ? 0.34 : light ? 0.12 : 0.18),
+  );
+  root.style.setProperty(
+    "--accent-ring",
+    rgba(rgb, ember ? 0.7 : light ? 0.4 : 0.5),
+  );
+  root.style.setProperty(
+    "--accent-glow-1",
+    rgba(rgb, ember ? 0.4 : light ? 0.25 : 0.35),
+  );
+  root.style.setProperty(
+    "--accent-glow-2",
+    rgba(rgb, ember ? 0.2 : light ? 0.12 : 0.18),
+  );
   root.style.setProperty(
     "--accent-text",
     light ? darken(rgb, 0.1) : lighten(rgb, 0.55),

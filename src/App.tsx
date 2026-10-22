@@ -1009,12 +1009,7 @@ export default function App() {
         resizeTimeout.current = null;
       }
     };
-  }, [
-    tab,
-    dropdownOverflowBottom,
-    settingsLoaded,
-    settings.statusBarEnabled,
-  ]);
+  }, [tab, dropdownOverflowBottom, settingsLoaded, settings.statusBarEnabled]);
 
   useEffect(() => {
     const theme = settings.theme ?? "ember";
@@ -1056,20 +1051,20 @@ export default function App() {
             inputOff: "238, 240, 248",
           }
         : settings.theme === "ember"
-        ? {
-            base: "11, 12, 14",
-            surface: "20, 21, 24",
-            elevated: "30, 33, 38",
-            input: "24, 26, 30",
-            inputOff: "20, 22, 25",
-          }
-        : {
-            base: "11, 15, 20",
-            surface: "17, 24, 39",
-            elevated: "31, 41, 55",
-            input: "22, 32, 46",
-            inputOff: "17, 25, 37",
-          };
+          ? {
+              base: "11, 12, 14",
+              surface: "20, 21, 24",
+              elevated: "30, 33, 38",
+              input: "24, 26, 30",
+              inputOff: "20, 22, 25",
+            }
+          : {
+              base: "11, 15, 20",
+              surface: "17, 24, 39",
+              elevated: "31, 41, 55",
+              input: "22, 32, 46",
+              inputOff: "17, 25, 37",
+            };
 
     root.style.setProperty(
       "--bg-base",

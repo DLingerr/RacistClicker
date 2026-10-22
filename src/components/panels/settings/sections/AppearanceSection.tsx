@@ -251,9 +251,7 @@ export default function AppearanceSection({ settings, update }: Props) {
       <div className="settings-row">
         <div className="settings-label-group">
           <span className="settings-label">Theme</span>
-          <span className="settings-sublabel">
-            Choose the look of the app.
-          </span>
+          <span className="settings-sublabel">Choose the look of the app.</span>
         </div>
         <div className="settings-seg-group">
           {THEME_OPTIONS.map((theme) => (
@@ -287,7 +285,9 @@ export default function AppearanceSection({ settings, update }: Props) {
           </span>
           <button
             className="settings-btn-secondary"
-            onClick={() => update({ accentColor: THEME_ACCENT_COLORS[settings.theme] })}
+            onClick={() =>
+              update({ accentColor: THEME_ACCENT_COLORS[settings.theme] })
+            }
             disabled={
               settings.accentColor === THEME_ACCENT_COLORS[settings.theme]
             }

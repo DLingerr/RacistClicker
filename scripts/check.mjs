@@ -100,7 +100,17 @@ function run(c) {
 async function guardRunningInstance() {
   let running = false;
   if (process.platform === 'win32') {
-    const r = spawnSync('tasklist', ['/NH'], { encoding: 'utf8', shell: true });
+    // Use PowerShell instead of tasklist: some terminals have a PATH without
+    // System32, where tasklist cannot be found.
+    const r = spawnSync(
+      'powershell',
+      [
+        '-NoProfile',
+        '-Command',
+        '(Get-Process -ErrorAction SilentlyContinue | ForEach-Object { $_.ProcessName }) -join "\n"',
+      ],
+      { encoding: 'utf8' },
+    );
     const out = r.stdout || '';
     running = /RacistClicker/i.test(out) || /crashpad_handler/i.test(out);
   } else {
@@ -117,8 +127,10 @@ async function guardRunningInstance() {
       const resource = resolve('src-tauri/resources/crashpad_handler.exe');
       const fd = openSync(resource, 'r+');
       closeSync(fd);
-    } catch {
-      running = true;
+    } catch (err) {
+      // A missing file just means nothing has built it yet; only a locked or
+      // unreadable file means an instance is holding it.
+      if (err && err.code !== 'ENOENT') running = true;
     }
   }
 

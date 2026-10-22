@@ -162,7 +162,7 @@ fn extract_icon_pixels(exe_path: &str) -> Option<(Vec<u8>, u32, u32)> {
 fn extract_process_icon_base64(exe_path: &str) -> Option<String> {
     let (pixels, w, h) = extract_icon_pixels(exe_path)?;
     let mut rgba = pixels;
-    for chunk in rgba.chunks_exact_mut(4) {
+    for chunk in rgba.as_chunks_mut::<4>().0 {
         chunk.swap(0, 2);
     }
     let mut png_bytes = Vec::new();
